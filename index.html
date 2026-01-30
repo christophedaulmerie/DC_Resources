@@ -7,7 +7,7 @@
   <style>
     :root {
       --gap: 24px;
-      --tile-height: 65vh;   
+      --tile-height: 45vh;   /* lower height so 3 columns fit comfortably on desktop */
       --bg: #0b132b;
       --fg: #e8eef9;
       --muted: #9fb3c8;
@@ -32,10 +32,17 @@
       display: grid;
       gap: var(--gap);
       padding: 20px;
+      grid-template-columns: 1fr;  /* default: phones = 1 column */
     }
+    /* tablets / small laptops: 2 columns */
     @media (min-width: 900px) {
       .grid { grid-template-columns: 1fr 1fr; }
     }
+    /* desktops and wider: 3 columns */
+    @media (min-width: 1300px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
     .tile {
       background: #0e1a36;
       border: 1px solid rgba(255,255,255,.08);
@@ -44,19 +51,20 @@
       box-shadow: 0 10px 24px rgba(0,0,0,.25);
     }
     .tile h2 {
-      margin: 0; padding: 12px 16px; font-size: 16px; 
+      margin: 0; padding: 12px 16px; font-size: 16px; letter-spacing: .5px;
       background: linear-gradient(180deg, #0e1a36, #0e1a36d0);
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .embed-wrap {
       height: var(--tile-height);
       position: relative;
-      background: #000;
+      background: #000; /* behind the iframe */
     }
     .embed-wrap iframe {
       position: absolute; inset: 0;
       width: 100%; height: 100%; border: 0;
     }
+
     footer { padding: 16px 20px; color: var(--muted); font-size: 12px; }
     footer a { color: var(--accent); text-decoration: none; }
   </style>
@@ -74,8 +82,7 @@
   <section class="tile">
     <h2>EIKEFET</h2>
     <div class="embed-wrap">
-      <iframe 
-        src="https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:60.701/centerx:5.552/maptype:1/shownames:true/mmsi:0/shipid:0/fleet:/fleet_id:/vtypes:/showmenu:false/remember:false">
+      https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:60.701/centerx:5.552/maptype:1/shownames:true/mmsi:0/shipid:0/fleet:/fleet_id:/vtypes:/showmenu:false/remember:false
       </iframe>
     </div>
   </section>
@@ -84,8 +91,7 @@
   <section class="tile">
     <h2>HALSVIK</h2>
     <div class="embed-wrap">
-      <iframe 
-        src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/fleet:/fleet_id:/vtypes:/showmenu:false/remember:false">
+      https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/fleet:/fleet_id:/vtypes:/showmenu:false/remember:false
       </iframe>
     </div>
   </section>
@@ -94,17 +100,3 @@
   <section class="tile">
     <h2>SELJESTOKKEN</h2>
     <div class="embed-wrap">
-      <iframe 
-        src="https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:61.669/centerx:4.975/maptype:1/shownames:true/mmsi:0/shipid:0/fleet:/fleet_id:/vtypes:/showmenu:false/remember:false">
-      </iframe>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  Map embeds via MarineTraffic Embed Map.
-</footer>
-
-</body>
-</html>
