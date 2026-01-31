@@ -7,7 +7,6 @@
   <style>
     :root {
       --gap: 24px;
-      --tile-height: 45vh;
       --bg: #0b132b;
       --fg: #e8eef9;
       --muted: #9fb3c8;
@@ -16,7 +15,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--fg);
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
     }
     header {
       padding: 16px 20px;
@@ -51,14 +50,34 @@
       background: #0e1a36;
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
+
+    /* --- MAP SIZING (fix for mobile black maps) --- */
     .embed-wrap {
-      height: var(--tile-height);
-      background: #000;
       position: relative;
+      background: #000;
+      /* Give the container a stable height on mobile so the iframe never starts at 0px */
+      height: 280px;                /* phones */
     }
-    iframe {
-      width: 100%; height: 100%; border: 0;
+    /* Tablet up */
+    @media (min-width: 640px)  { .embed-wrap { height: 320px; } }
+    /* Desktop */
+    @media (min-width: 900px)  { .embed-wrap { height: 360px; } }
+    /* Large desktop / 3-up */
+    @media (min-width: 1300px) { .embed-wrap { height: 400px; } }
+
+    /* The iframe fills its container */
+    .harbour-map {
       position: absolute; inset: 0;
+      display: block;
+      width: 100%; height: 100%;
+      border: 0;
+      border-radius: 0;   /* parent already has rounded corners */
+    }
+
+    /* If you apply any dark-mode filters globally, make sure they don't affect iframes/canvas */
+    :where(iframe, iframe *, canvas, video, img) {
+      filter: none !important;
+      mix-blend-mode: normal !important;
     }
   </style>
 </head>
@@ -75,7 +94,11 @@
   <section class="tile">
     <h2>EIKEFET</h2>
     <div class="embed-wrap">
-      **<iframe src="https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:60.701/centerx:5.552/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false"></iframe>**
+      <iframe
+        class="harbour-map"
+        loading="lazy"
+        src="https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:60.701/centerx:5.552/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false">
+      </iframe>
     </div>
   </section>
 
@@ -83,7 +106,11 @@
   <section class="tile">
     <h2>HALSVIK</h2>
     <div class="embed-wrap">
-      **<iframe src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false"></iframe>**
+      <iframe
+        class="harbour-map"
+        loading="lazy"
+        src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false">
+      </iframe>
     </div>
   </section>
 
@@ -91,7 +118,11 @@
   <section class="tile">
     <h2>SELJESTOKKEN</h2>
     <div class="embed-wrap">
-      **<iframe src="https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:61.669/centerx:4.975/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false"></iframe>**
+      <iframe
+        class="harbour-map"
+        loading="lazy"
+        src="https://www.marinetraffic.com/en/ais/embed/zoom:17/centery:61.669/centerx:4.975/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false">
+      </iframe>
     </div>
   </section>
 
