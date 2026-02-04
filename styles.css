@@ -1,0 +1,120 @@
+/* ----------------------------------------------
+   GLOBAL COLORS & BASE
+---------------------------------------------- */
+:root {
+  --gap: 24px;
+  --bg: #0b132b;
+  --panel: #0e1a36;
+  --fg: #e8eef9;
+  --muted: #9fb3c8;
+}
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ----------------------------------------------
+   HEADER
+---------------------------------------------- */
+header {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: var(--bg);
+  position: sticky; 
+  top: 0; 
+  z-index: 10;
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+header p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ----------------------------------------------
+   MAIN GRID (index.html only)
+---------------------------------------------- */
+.grid {
+  display: grid;
+  gap: var(--gap);
+  padding: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1300px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ----------------------------------------------
+   TILE / PANEL
+---------------------------------------------- */
+.tile {
+  background: var(--panel);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.tile h2 {
+  margin: 0;
+  padding: 12px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.tile p {
+  margin: 0;
+  padding: 12px;
+}
+
+/* ----------------------------------------------
+   MAP Responsive
+---------------------------------------------- */
+.embed-wrap {
+  position: relative;
+  background: #000;
+  height: 280px;
+}
+
+@media (min-width: 640px)  { .embed-wrap { height: 320px; } }
+@media (min-width: 900px)  { .embed-wrap { height: 360px; } }
+@media (min-width: 1300px) { .embed-wrap { height: 400px; } }
+
+.harbour-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Prevent dark-mode browser extensions from ruining map tiles */
+:where(iframe, iframe *, canvas, video, img) {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+}
+
+/* ----------------------------------------------
+   LINKS
+---------------------------------------------- */
+a {
+  color: #9fb3c8;
+  text-decoration: none;
+}
+a:hover {
+  color: #c5d6e8;
+  text-decoration: underline;
+}
