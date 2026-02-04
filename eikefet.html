@@ -6,12 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
   
+  
+<!-- Eikefet-only override: make the map 80% of the viewport height -->
   <style>
-    /* Eikefet-specific map height */
+    /* Ensure the map container is tall on this page only */
     .embed-wrap {
-      height: 80vh !important;
+      position: relative;
+      background: #000;
+      height: 80vh !important;   /* override shared responsive heights */
+    }
+    /* Make the iframe truly fill its container */
+    .harbour-map {
+      position: absolute;
+      inset: 0;
+      width: 80%;
+      height: 80%;
+      border: 0;
+      display: block;
+    }
+    /* Optional: give the tile some inner breathing room on single-page view */
+    .tile {
+      margin: 20px;
     }
   </style>
+
 
 </head>
 <body>
