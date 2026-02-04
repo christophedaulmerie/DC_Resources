@@ -5,16 +5,102 @@
   <title>HALSVIK – Live Harbour Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
+  
+  
+<!-- Eikefet-only override: make the map 80% of the viewport height -->
+  <style>
+    /* Ensure the map container is tall on this page only */
+    .embed-wrap {
+      position: relative;
+      background: #000;
+      height: 80vh !important;   /* override shared responsive heights */
+    }
+    /* Make the iframe truly fill its container */
+    .harbour-map {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    /* Optional: give the tile some inner breathing room on single-page view */
+    .tile {
+      margin: 20px;
+    }
+  </style>
+
+<style>
+  /* Make header show title on left, time on right */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: #0b132b;
+  }
+
+  #datetime {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e8eef9;
+    white-space: nowrap;
+    text-align: right;
+  }
+</style>
+
+
 </head>
+
+
+<script>
+function updateDateTime() {
+  const now = new Date();
+
+  const day = now.getDate();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = monthNames[now.getMonth()];
+  const year = now.getFullYear();
+
+  function ordinal(n) {
+    if (n > 3 && n < 21) return n + "th";
+    switch (n % 10) {
+      case 1: return n + "st";
+      case 2: return n + "nd";
+      case 3: return n + "rd";
+      default: return n + "th";
+    }
+  }
+
+  const hours = String(now.getHours()).padStart(2, "0");
+  const mins  = String(now.getMinutes()).padStart(2, "0");
+
+  const formatted = `${ordinal(day)} ${month} ${year}  -  ${hours}h${mins}`;
+
+  document.getElementById("datetime").textContent = formatted;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+</script>
+
+
 <body>
 
 <header>
-  <h1>HALSVIK – Live Harbour Map</h1>
-  <p><a href="index.html" style="color: #9fb3c8;">← Back to main overview</a></p>
+  
+   <div class="header-left">
+    <h1>HALSVIK – Live Harbour Map</h1>
+    <p><a href="index.html" style="color: #9fb3c8;">← Back to main overview</a></p>
+  </div>
+
+  <div id="datetime"></div>
+
 </header>
 
 <section class="tile">
-  <h2>HALSVIK</h2>
   <div class="embed-wrap">
     <iframe
       class="harbour-map"
