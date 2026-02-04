@@ -13,31 +13,42 @@ html, body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+               "Helvetica Neue", Arial, sans-serif;
 }
 
 /* ----------------------------------------------
-   HEADER
+   HEADER (with datetime on the right)
 ---------------------------------------------- */
 header {
   padding: 16px 20px;
   border-bottom: 1px solid rgba(255,255,255,.08);
   background: var(--bg);
-  position: sticky; 
-  top: 0; 
-  z-index: 10;
+  
+  /* NEW → same line layout */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header h1 {
+.header-left h1 {
   margin: 0 0 4px;
   font-size: 20px;
   font-weight: 700;
 }
 
-header p {
+.header-left p {
   margin: 0;
   font-size: 13px;
   color: var(--muted);
+}
+
+/* NEW → Date/Time box */
+#datetime {
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  text-align: right;
 }
 
 /* ----------------------------------------------
@@ -59,62 +70,9 @@ header p {
 }
 
 /* ----------------------------------------------
-   TILE / PANEL
+   TILE / PANEL STYLE
 ---------------------------------------------- */
 .tile {
   background: var(--panel);
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08);
-}
-
-.tile h2 {
-  margin: 0;
-  padding: 12px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-.tile p {
-  margin: 0;
-  padding: 12px;
-}
-
-/* ----------------------------------------------
-   MAP Responsive
----------------------------------------------- */
-.embed-wrap {
-  position: relative;
-  background: #000;
-  height: 280px;
-}
-
-@media (min-width: 640px)  { .embed-wrap { height: 320px; } }
-@media (min-width: 900px)  { .embed-wrap { height: 360px; } }
-@media (min-width: 1300px) { .embed-wrap { height: 400px; } }
-
-.harbour-map {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* Prevent dark-mode browser extensions from ruining map tiles */
-:where(iframe, iframe *, canvas, video, img) {
-  filter: none !important;
-  mix-blend-mode: normal !important;
-}
-
-/* ----------------------------------------------
-   LINKS
----------------------------------------------- */
-a {
-  color: #9fb3c8;
-  text-decoration: none;
-}
-a:hover {
-  color: #c5d6e8;
-  text-decoration: underline;
-}
