@@ -4,11 +4,83 @@
   <meta charset="utf-8" />
   <title>Harbour Views – Eikefet • Halsvik • Seljestokken</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --gap: 24px;
+      --bg: #0b132b;
+      --fg: #e8eef9;
+      --muted: #9fb3c8; 
+    }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+    }
+    header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: #0b132b;
+      position: sticky; top: 0; z-index: 10;
+    }
+    header h1 { margin: 0 0 4px; font-size: 20px; font-weight: 700; }
+    header p  { margin: 0; font-size: 13px; color: var(--muted); }
 
-  <!-- Shared global stylesheet -->
-  styles.css
+    .grid {
+      display: grid;
+      gap: var(--gap);
+      padding: 20px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 1300px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .tile {
+      background: #0e1a36;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .tile h2 {
+      margin: 0; padding: 12px; font-size: 16px;
+      background: #0e1a36;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* --- MAP SIZING (fix for mobile black maps) --- */
+    .embed-wrap {
+      position: relative;
+      background: #000;
+      /* Give the container a stable height on mobile so the iframe never starts at 0px */
+      height: 280px;                /* phones */
+    }
+    /* Tablet up */
+    @media (min-width: 640px)  { .embed-wrap { height: 320px; } }
+    /* Desktop */
+    @media (min-width: 900px)  { .embed-wrap { height: 360px; } }
+    /* Large desktop / 3-up */
+    @media (min-width: 1300px) { .embed-wrap { height: 400px; } }
+
+    /* The iframe fills its container */
+    .harbour-map {
+      position: absolute; inset: 0;
+      display: block;
+      width: 100%; height: 100%;
+      border: 0;
+      border-radius: 0;   /* parent already has rounded corners */
+    }
+
+    /* If you apply any dark-mode filters globally, make sure they don't affect iframes/canvas */
+    :where(iframe, iframe *, canvas, video, img) {
+      filter: none !important;
+      mix-blend-mode: normal !important;
+    }
+  </style>
 </head>
-
 <body>
 
 <header>
@@ -25,72 +97,53 @@
   <!-- EIKEFET -->
   <section class="tile">
     <h2>EIKEFET</h2>
-
     <div class="embed-wrap">
-      https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.701/centerx:5.552/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false
+      <iframe
+        class="harbour-map"
+        loading="lazy"
+        src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.701/centerx:5.552/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false">
       </iframe>
     </div>
-
-    <p>
-      eikefet.htmlOpen full page →</a>
+    
+    <p style="padding: 12px;">
+      <a href="eikefet.html" style="color: #9fb3c8;">Open full page →</a>
     </p>
+
   </section>
 
   <!-- HALSVIK -->
   <section class="tile">
     <h2>HALSVIK</h2>
-
     <div class="embed-wrap">
-      https://www.marinetraffic.com/en/ais/embed/zoom:15/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false
+      <iframe
+        class="harbour-map"
+        loading="lazy"
+        src="https://www.marinetraffic.com/en/ais/embed/zoom:15/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false">
       </iframe>
     </div>
-
-    <p>
-      halsvik.htmlOpen full page →</a>
+    <p style="padding: 12px;">
+      <a href="halsvik.html" style="color: #9fb3c8;">Open full page →</a>
     </p>
+    
   </section>
 
   <!-- SELJESTOKKEN -->
   <section class="tile">
     <h2>SELJESTOKKEN</h2>
-
     <div class="embed-wrap">
-      https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:61.669/centerx:4.974/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false
+      <iframe
+        class="harbour-map"
+        loading="lazy"
+        src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:61.669/centerx:4.974/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false">
       </iframe>
     </div>
-
-    <p>
-      seljestokken.htmlOpen full page →</a>
+    <p style="padding: 12px;">
+      <a href="seljestokken.html" style="color: #9fb3c8;">Open full page →</a>
     </p>
+    
   </section>
 
 </main>
-
-<!-- Live Date/Time Script -->
-<script>
-function updateDateTime() {
-  const now = new Date();
-
-  const day = now.getDate();
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  (n % 10) {
-      case 1: return n + "st";
-      case 2: return n + "nd";
-      case 3: return n + "rd";
-      default: return n + "th";
-    }
-  }
-
-  const hours = String(now.getHours()).padStart(2, "0");
-  const mins  = String(now.getMinutes()).padStart(2, "0");
-
-  const formatted = `${ordinal(day)} ${month} ${year}  -  ${hours}h${mins}`;
-  document.getElementById("datetime").textContent = formatted;
-}
-
-set.
-</script>
 
 </body>
 </html>
