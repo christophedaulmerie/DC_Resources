@@ -12,13 +12,9 @@
       height: 100%;
       background: #000;
     }
-    .map-container {
+    iframe {
       position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    iframe {
       width: 100%;
       height: 100%;
       border: 0;
@@ -26,12 +22,10 @@
   </style>
 
   <script>
-    function updateTitle() {
-      const now = new Date();
+    // Create the timestamp ONCE when page loads
+    window.addEventListener("DOMContentLoaded", () => {
 
-      const day = now.getDate();
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const now = new Date();
 
       function ordinal(n) {
         if (n > 3 && n < 21) return n + "th";
@@ -43,26 +37,15 @@
         }
       }
 
-      const dayStr = ordinal(day);
-      const monthStr = months[now.getMonth()];
-      const yearStr = now.getFullYear();
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+      const day = ordinal(now.getDate());
+      const month = months[now.getMonth()];
+      const year = now.getFullYear();
 
       const h = String(now.getHours()).padStart(2, "0");
       const m = String(now.getMinutes()).padStart(2, "0");
 
-      document.title = `${dayStr} ${monthStr} ${yearStr} - ${h}h${m}`;
-    }
-
-    setInterval(updateTitle, 1000);
-    updateTitle();
-  </script>
-
-</head>
-
-<body>
-  <div class="map-container">
-    https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.852/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false
-    </iframe>
-  </div>
-</body>
+     </body>
 </html>
