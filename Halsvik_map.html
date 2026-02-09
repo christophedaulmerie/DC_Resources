@@ -1,1 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>HALSVIK – Live Harbour Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+    }
+    .map-container {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="map-container">
+    <iframe
+      src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.851/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false"
+      loading="lazy"
+      title="HALSVIK Live AIS Map">
+    </iframe>
+  </div>
+</body>
+</html>
+``
