@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Loading…</title>
+  <title>HALSVIK – Live Harbour Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
@@ -12,40 +12,27 @@
       height: 100%;
       background: #000;
     }
-    iframe {
+    .map-container {
       position: fixed;
       inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    iframe {
       width: 100%;
       height: 100%;
       border: 0;
     }
   </style>
+</head>
 
-  <script>
-    // Create the timestamp ONCE when page loads
-    window.addEventListener("DOMContentLoaded", () => {
-
-      const now = new Date();
-
-      function ordinal(n) {
-        if (n > 3 && n < 21) return n + "th";
-        switch (n % 10) {
-          case 1: return n + "st";
-          case 2: return n + "nd";
-          case 3: return n + "rd";
-          default: return n + "th";
-        }
-      }
-
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-      const day = ordinal(now.getDate());
-      const month = months[now.getMonth()];
-      const year = now.getFullYear();
-
-      const h = String(now.getHours()).padStart(2, "0");
-      const m = String(now.getMinutes()).padStart(2, "0");
-
-     </body>
+<body>
+  <div class="map-container">
+    <iframe
+      src="https://www.marinetraffic.com/en/ais/embed/zoom:16/centery:60.851/centerx:5.068/maptype:1/shownames:true/mmsi:0/shipid:0/vtypes:/showmenu:false/remember:false"
+      loading="lazy"
+      title="HALSVIK Live AIS Map">
+    </iframe>
+  </div>
+</body>
 </html>
